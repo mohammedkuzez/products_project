@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/all.min.css">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Document</title>
 </head>
 <body>
@@ -181,7 +183,11 @@
             </dialog>
         </el-dialog>
     </header>
-    <div class="container"></div>
+    <input id="search_bar" class="px-8 my-5 grid rounded-2xl bg-red-400 m-auto text-white" type="text"></input>
+    <i class="fa-regular fa-heart Love_icon p-2 opacity-70 bg-green-400 text-gray-600 rounded-lg z-20"></i>
+    <button id="flex_row" class="bg-red-800 cursor-pointer">flex row</button>
+    <button id="grid" class="bg-red-800 cursor-pointer">grid</button>
+    <div id="cards_container" class="grid grid-cols-4 gap-6 rounded-2xl"></div>
     <script src="./js/main.js"></script>
 </body>
 </html>
