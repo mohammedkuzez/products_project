@@ -7,7 +7,7 @@ function printCard(products_array) {
     document.querySelector("#cards_container").innerHTML += 
     `<div class="bg-cyan-200 relative">
     <i class="fa-regular fa-heart Love_icon absolute top-3 right-3 p-2 opacity-50 bg-green-400 text-gray-600 rounded-lg z-50"></i>
-    <img src="${Object.images}">
+    <img src="${Object.images[0]}">
     <div><span class="text-rose-500">title:</span> ${Object.title}</div>
     <div><span class="text-rose-500 mb-[200px]">description:</span> ${Object.description}</div>
     <div><span class="text-rose-500">category:</span> ${Object.category}</div>
