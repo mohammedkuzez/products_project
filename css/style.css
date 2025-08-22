@@ -19,6 +19,7 @@
     --color-cyan-200: oklch(91.7% 0.08 205.041);
     --color-cyan-300: oklch(86.5% 0.127 207.078);
     --color-cyan-500: oklch(71.5% 0.143 215.221);
+    --color-pink-400: oklch(71.8% 0.202 349.761);
     --color-rose-200: oklch(89.2% 0.058 10.001);
     --color-rose-300: oklch(81% 0.117 11.638);
     --color-rose-500: oklch(64.5% 0.246 16.439);
@@ -268,8 +269,20 @@
   .right-5 {
     right: calc(var(--spacing) * 5);
   }
+  .right-6 {
+    right: calc(var(--spacing) * 6);
+  }
+  .right-7 {
+    right: calc(var(--spacing) * 7);
+  }
   .right-10 {
     right: calc(var(--spacing) * 10);
+  }
+  .right-12 {
+    right: calc(var(--spacing) * 12);
+  }
+  .right-14 {
+    right: calc(var(--spacing) * 14);
   }
   .right-15 {
     right: calc(var(--spacing) * 15);
@@ -593,6 +606,9 @@
   }
   .bg-green-500 {
     background-color: var(--color-green-500);
+  }
+  .bg-pink-400 {
+    background-color: var(--color-pink-400);
   }
   .bg-red-200 {
     background-color: var(--color-red-200);
