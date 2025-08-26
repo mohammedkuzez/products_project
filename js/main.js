@@ -7,7 +7,7 @@ function printCard(products_array) {
     document.querySelector("#cards_container").innerHTML += 
     `<div class="bg-cyan-200 relative">
     <i class="fa-regular fa-heart love_icon absolute top-3 right-3 p-2 opacity-50 bg-white text-gray-600 rounded-lg"></i>
-    <i class="fa-solid fa-pen-to-square absolute top-3 right-12 p-2 opacity-50 bg-white text-gray-600 rounded-lg"></i>
+    <i class="fa-regular fa-pen-to-square absolute top-3 right-12 p-2 opacity-50 bg-white text-gray-600 rounded-lg"></i>
     <img src="${Object.images[0]}">
     <div><span class="text-rose-500">title:</span> ${Object.title}</div>
     <div><span class="text-rose-500 mb-[200px]">description:</span> ${Object.description}</div>
@@ -15,7 +15,74 @@ function printCard(products_array) {
     <div><span class="text-rose-500">price:</span> ${Object.price}</div>
     </div>
     `
+    
   });
+  document.querySelectorAll(".fa-pen-to-square").forEach((single_edit,index) => {
+    single_edit.addEventListener("click", () => {
+      editCard(my_products,index)
+    })
+  })
+  document.querySelectorAll(".love_icon").forEach((single_icon,index) => {
+    single_icon.addEventListener("click", ()=>{
+      
+      if (single_icon.classList.contains("fa-regular")) {
+        single_icon.classList.remove("fa-regular")
+        single_icon.classList.add("fa-solid")
+        single_icon.classList.add("text-red-600")
+        
+        love_list.push(my_products[index]) 
+        document.querySelector(".love_list").innerHTML = 
+        `<div class="absolute top-0 right-0">${document.querySelectorAll(".text-red-600").length}</div>
+        `
+      }
+      else {
+        single_icon.classList.remove("fa-solid")
+        single_icon.classList.remove("text-red-600")
+        single_icon.classList.add("fa-regular")
+        remove_love_from_love_list = love_list.findIndex(remove_product => remove_product.id === my_products[index].id)
+
+        love_list.splice(remove_love_from_love_list, 1) 
+        if (document.querySelectorAll(".text-red-600").length == 0) {
+          document.querySelector(".love_list").innerHTML = ""
+        }
+        else {
+          document.querySelector(".love_list").innerHTML = 
+          `<div class="absolute top-0 right-0">${document.querySelectorAll(".text-red-600").length}</div>
+          `
+        }
+      }
+      console.log(love_list);
+      
+    })
+  })
+  document.querySelector(".love_list").addEventListener("click",() => {
+    document.querySelector(".love_icon_list").innerHTML =
+  `<div class="fixed z-50 bg-white">
+  <button id="delete" class="absolute top-1 right-2">X</button>
+  <label for="title">title: </label>
+  <input id="title" type="text" value="${products_array[index].title}"> 
+  <label for="description">description: </label>
+  <input id="description" type="text" value="${products_array[index].description}"> 
+  <label for="discount">discount: </label>
+  <input id="discount" type="text" value="${products_array[index].discountPercentage}">
+  <label for="brand">brand: </label>
+  <input id="brand" type="text" value="${products_array[index].brand}">
+  <label for="returnpolicy">return Policy: </label>
+  <input id="returnpolicy" type="text" value="${products_array[index].returnPolicy}">
+  <label for="tags">tags: </label>
+  <input id="tags" type="text" value="${products_array[index].tags.toString()}">
+  <label for="img0">Product_images: </label>
+  <input id="img0" type="text" value="${products_array[index].images[0].split("https://cdn.dummyjson.com/product-images")[1]}">
+  ${products_array[index].images[1]? `<input id="img1" type="text" value="${products_array[index].images[1].toString().split("https://cdn.dummyjson.com/product-images")[1]}"></input>`: ""}
+  ${products_array[index].images[2]? `<input id="img1" type="text" value="${products_array[index].images[2].toString().split("https://cdn.dummyjson.com/product-images")[1]}"></input>`: ""}
+  ${products_array[index].images[3]? `<input id="img1" type="text" value="${products_array[index].images[3].toString().split("https://cdn.dummyjson.com/product-images")[1]}"></input>`: ""}
+  <label for="stock">stock: </label>
+  <input id="stock" type="text" value="${products_array[index].stock}">
+  <label for="price">price: </label>
+  <input id="price" type="text" value="${products_array[index].price}">
+  <button class="bg-black text-white cursor-pointer save_changes">save changes</button>
+  </div>`
+  })
 }
 function search(products_array,search_value = "") {
   var filtered_products
@@ -90,11 +157,6 @@ fetch('https://dummyjson.com/products')
   input.addEventListener("keyup", function() {
     search(my_products,input.value)
   })
-  document.querySelectorAll(".fa-pen-to-square").forEach((single_edit,index) => {
-    single_edit.addEventListener("click", () => {
-      editCard(my_products,index)
-    })
-  })
     })
     .catch(err => console.error("Fetch error:", err));
 
@@ -109,22 +171,4 @@ fetch('https://dummyjson.com/products')
       document.querySelector("#cards_container").classList.remove("grid-cols-4")
       document.querySelector("#cards_container").classList.add("flex")
       document.querySelector("#cards_container").classList.add("flex-col")
-    })
-    document.querySelectorAll(".love_icon").forEach((single_icon,index) => {
-      single_icon.addEventListener("click", ()=>{
-        if (single_icon.classList.contains("fa-regular")) {
-          single_icon.classList.remove("fa-regular")
-          single_icon.classList.add("fa-solid")
-          single_icon.classList.add("text-red-600")
-          love_list.push(my_products[index]) 
-        }
-        else {
-          single_icon.classList.remove("fa-solid")
-          single_icon.classList.remove("text-red-600")
-          single_icon.classList.add("fa-regular")
-          love_list.pop(my_products[index]) 
-        }
-        console.log(love_list);
-        
-    })
     })
